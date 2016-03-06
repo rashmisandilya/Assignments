@@ -1,0 +1,82 @@
+\documentclass{article}
+\input{503macros.tex}
+\def\unityid{MISSING-ID}
+
+\begin{document}
+\begin{center}
+  {\LARGE CSC 503 Homework Assignment 3}\\[1pc]
+  Out: September 4, 2015 \\
+  Due: September 11, 2015 \\
+  \unityid
+\end{center}
+
+\begin{enumerate}
+
+\item {[20 points]} Construct a formula $\phi$ in \textbf{DNF} to
+  match the following truth table:
+  \begin{center}
+    \begin{tabular}{cc|c}
+      $p$ & $q$ & $\phi$ \\ \hline
+      T & T & T \\
+      T & F & F \\
+      F & T & T \\
+      F & F & F
+    \end{tabular}
+  \end{center}
+
+\item {[20 points]} Construct a formula $\phi$ in \textbf{CNF} to
+  match the following truth table:
+  \begin{center}
+    \begin{tabular}{ccc|c}
+      $p$ & $q$ & $r$ & $\phi$ \\ \hline
+      T & T & T & T\\
+      T & T & F & F\\
+      T & F & T & F\\
+      T & F & F & F\\
+      F & T & T & F\\
+      F & T & F & T\\
+      F & F & T & T\\
+      F & F & F & T
+    \end{tabular}
+  \end{center}
+  
+\item {[30 points]} Consider the atomic sentences
+  \begin{center}
+    \begin{tabular}{rcl}
+      $p$ &=& The cow jumped over the moon. \\
+      $q$ &=& The little dog laughed. \\
+      $r$ &=& The dish ran away with the spoon. \\
+    \end{tabular}
+  \end{center}
+  Using these, form the three complex statements
+  \begin{enumerate}
+  \item If the cow jumped over the moon and the little dog laughed,
+    then the dish ran away with the spoon.
+  \item If the little dog laughed, then the cow jumped over the moon.
+  \item If the dish ran away with the spoon, then the little dog
+    laughed.
+  \end{enumerate}
+  Show that these three complex statements are logically independent
+  of each other by providing, for each of these three complex
+  statements, a truth assignment to the atomic sentences that makes
+  the complex statement false and the other complex statements true.
+
+\item {[30 points]} Apply algorithm HORN from page 66 of the textbook
+  to the following Horn formula.
+  \begin{displaymath}
+    \begin{array}{ll}
+      (\top \implies q) &\land \\
+      (\top \implies s) &\land \\
+      (w \implies \bot) &\land \\
+      (p \land q \land s \implies \bot) &\land \\
+      (v \implies s) &\land \\
+      (\top \implies r) &\land \\
+      (r \implies p) &\land \\
+      (p \land s \implies s)
+    \end{array}
+  \end{displaymath}
+  Your answer should list propositional letters in the order in which
+  they are marked as well as giving the overall answer.
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+
+\input{503macros.tex}
+
+
+\begin{document}
+Q1.
+
+ a) Answer:
+
+ p - Jack ran up the hill.
+ 
+ q - Jill ran up the hill.
+ 
+ $(p \land q)$
+ \\*
+ 
+ b) Answer:
+
+ p - Real Madrid FC ran up the hill
+ 
+  $p$
+ \\*
+ 
+ c) Answer:
+
+ p - NC State has a red and white logo.
+ 
+  $p$
+  \\*
+
+
+ d) Answer:
+
+ P – Jack fell down, q – jack broke his crown.
+ 
+ ($\neg p) \implies (\neg q)\ $
+ \\*
+ 
+
+ e) Answer:
+
+ P – Jack fell down, q – jack broke his crown, r – Jill came tumbling after
+
+ $ (p \land q)\land r$
+ \\*
+
+
+ 
+ Q2.
+ 
+ a) $((\neg p)\lor q) \implies ((\neg(\neg q))\land(\neg r))$
+ \\*
+ 
+ b) $r \implies(((\neg q)\lor p)\implies (q \implies (\neg p)\lor r))$
+ \\*
+ 
+ 
+ Q3.
+ 
+Let F be $((p \implies \neg q) \lor (p \land s) \implies r) \land \neg r$ and S(F) be the set of subformulas of F
+
+Then
+
+S(F) = {$((p \implies \neg q) \lor (p \land s) \implies r) \land \neg r$, $(p \implies \neg q) \lor (p \land s) \implies r$, $(p \implies \neg q) \lor (p \land s)$, $(p \implies \neg q)$, $(p \land s)$,$p$, $\neg q$, $s$,$\neg r$, $r$}
+\\*
+ 
+
+Q4.
+
+The expression $p \lor q \land r$ is problematic because both $\land$ and $\lor$ have same connective precedence. This will result in conflict or disagreement if interpreted in different ways as follows:
+\\*
+
+First interpretation:
+ $(p \lor q) \land r$
+  
+  	\begin{displaymath}
+  		\begin{array}[t]{|c|c|c|c|c|} \hline
+    		p & q & r & (p \lor q) & (p \lor q) \land r \\ \hline\hline
+    		T & T & T & T & T \\ \hline
+    		T & T & F & T & F \\ \hline
+    		T & F & T & T & T \\ \hline
+  	 		T & F & F & T & F \\ \hline
+  	 		F & T & T & T & T \\ \hline
+    		F & T & F & T & F \\ \hline
+    		F & F & T & F & F \\ \hline
+  	 		F & F & F & F & F \\ \hline
+  		\end{array}
+  	\end{displaymath}
+  	
+  	Second interpretation:
+  	
+  	$p \lor (q \land r)$
+  	
+  	\begin{displaymath}
+  		\begin{array}[t]{|c|c|c|c|c|} \hline
+    		p & q & r & (q \land r) & p \lor (q \land r) \\ \hline\hline
+    		T & T & T & T & T \\ \hline
+    		T & T & F & F & T \\ \hline
+    		T & F & T & F & T \\ \hline
+  	 		T & F & F & F & T \\ \hline
+  	 		F & T & T & T & T \\ \hline
+    		F & T & F & F & F \\ \hline
+    		F & F & T & F & F \\ \hline
+  	 		F & F & F & F & F \\ \hline
+  		\end{array}
+  	\end{displaymath}
+
+Q5.
+
+The complete truth table of
+$((p \implies \neg q) \implies (q \implies p)$ can be demonstrated as:
+
+\begin{center}
+	\begin{tabular}{|c c c | c | c | c|}
+	\hline
+	$p$ & $q$ & $\neg q$ & $p \implies \neg q$ & $q \implies p$ & $(p \implies \neg q) \implies (q \implies p)$ \\ \hline
+	T & T & F &F &T &T \\ \hline
+	T & F & T &T &T &T \\ \hline
+	F & T & F &F &F &F \\ \hline
+	F & F & T &T &T &T \\ \hline
+	
+	\end{tabular}
+	\end{center}
+	
+Q6.
+
+The Truth table for the formula $(p \implies q) \lor (\neg q \land \neg r)$ can be demonstrated as :
+
+\begin{center}
+	\begin{tabular}{|c c c | c | c | c | c | c | }
+	\hline
+	$p$ & $q$ & $r$ & $p \implies q$ & $\neg q$ & $\neg r$ & $\neg q \land \neg r $ & $(p \implies q) \lor (\neg q \implies \neg r) $  \\ \hline
+	T & T & T & T & F & F & F & T \\ \hline
+	T & T & F & T & F & T & F & T \\ \hline
+	T & F & T & F & T & F & F & \colorbox{red!50}{F} \\ \hline
+	T & F & F & F & T & T & T & T \\ \hline
+	F & T & T & T & F & F & F & T \\ \hline
+	F & T & F & T & F & T & F & T \\ \hline
+	F & F & T & T & T & F & F & T \\ \hline
+	F & F & F & T & T & T & T & T \\ \hline
+	\end{tabular}
+	\end{center}
+
+$(p \implies q) \lor (\neg q \land \neg r)$ , thus  is satisfiable as some interpretation (here all except one)  makes it true but is not valid since every interpretation does not make it true.
+\\*
+
+
+Q7.
+
+
+The Truth table for $\neg p \implies (r \lor q), \neg q \land p \models p \implies q$ is:
+
+\begin{center}
+	\begin{tabular}{|c c c | c | c | c | c | c | c | }
+	\hline
+	$p$ & $q$ & $r$ & $\neg p$ & $\neg q $ & $r \lor q$ & $\neg p \implies(r \lor q)$ & $\neg q \land p $ & $p \implies q $   \\ \hline
+    T & T & T & F & F & T & T & F & T\\ \hline
+	T & T & F & F & F & T & T & F & T\\ \hline
+	T & F & T & F & T & T & \colorbox{red!50}{T} & \colorbox{red!50}{T} & \colorbox{red!50}{F}\\ \hline
+	T & F & F & F & T & F & \colorbox{red!50}{T} & \colorbox{red!50}{T} & \colorbox{red!50}{F}\\ \hline
+	F & T & T & T & F & T & T & F & T\\ \hline
+	F & T & F & T & F & T & T & F & T\\ \hline
+	F & F & T & T & T & T & T & F & T\\ \hline
+	F & F & F & T & T & F & F & F & T\\ \hline
+	\end{tabular}
+	\end{center}
+
+The entailment claim is not true due to the valuation highlighted in the table since the truth values of the formulas to the left are T and truth values of the formula to the right are F.
+\\*
+
+
+Q8.
+
+The Truth table for $\models (p \lor q) \land (\neg q \lor r) \implies (p \lor r)$ is:
+
+\begin{center}
+	\begin{tabular}{|c c c | c | c | c | c | c | c |}
+	\hline
+	$p$ & $q$ & $r$  & $\neg q$ &$ p \lor q$ & $\neg q \lor r $  & $(p \lor q) \land (\neg q \lor r)$ & $p \lor r$ & $(p \lor q) \land (\neg q \lor r) \implies (p \lor r)$\\ \hline
+	
+	T & T & T & F & T & T & T & T & T\\ \hline
+	T & T & F & T & T & F & F & T & T\\ \hline
+	T & F & T & F & T & T & T & T & T\\ \hline
+	T & F & F & T & T & T & T & T & T\\ \hline
+	F & T & T & F & T & T & T & T & T\\ \hline
+	F & T & F & T & T & F & F & F & T\\ \hline
+	F & F & T & F & F & T & F & T & T\\ \hline
+	F & F & F & T & F & T & F & F & T\\ \hline
+
+\end{tabular}
+	\end{center}
+From the truth table, it can be seen that the claim holds as it evaluates to T for every valuation.
+\\*
+
+\end{document}

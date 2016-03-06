@@ -1,0 +1,139 @@
+\documentclass{article}
+\input{503macros.tex}
+\def\unityid{rsandil}
+
+\begin{document}
+\begin{center}
+  {\LARGE CSC 503 Homework Assignment 5}\\[1pc]
+  Out: September 11, 2015 \\
+  Due: September 18, 2015 \\
+  \unityid
+\end{center}
+
+In using the Fitch macros to typeset proofs in first order logic, one
+introduces a dummy variable $x$ by means of the command
+\verb+\open[x]+. 
+
+\begin{enumerate}
+
+\item {[10 points]} Using only the basic natural deduction rules, find
+  a proof for
+  \begin{displaymath}
+    \forall x (P(x) \implies Q(x)) \turn \forall x P(x) \implies
+    \forall x Q(x).
+\end{displaymath}
+\begin{answer}
+	\[
+		\begin{nd}
+			\hypo{1} {\forall x (P(x) \implies Q(x)))} \premise{}
+			\open
+			\hypo{2} {\forall x (P(x)} \assumption{}
+			\open[x_0]
+			\have{3}{(P(x_0) \implies Q(x_0))} \Ae {1}
+			\have{4}{P(x_0)} \Ae{2}
+			\have{5}{Q(x_0)} \ie {3, 4}			
+			\close
+			\have{6}{\forall x Q(x)} \Ai {3-5}
+			\close
+			\have{7}{\forall x P(x) \implies \forall x Q(x)} \ii {2-6}
+			
+
+		\end{nd}
+	\]
+\end{answer}
+\item {[20 points]} Using only the basic natural deduction rules, find
+  a proof for
+  \begin{displaymath}
+    \forall x \forall y P(x,y) \turn \forall u \forall v P(u,v).
+\end{displaymath}
+\begin{answer}
+	\[
+		\begin{nd}
+			\hypo{1} {\forall x \forall y P(x,y)} \premise{}
+			\open[x_0]
+			\have{2} { \forall y P(x_0,y)} \Ae {1}
+            \open[y_0]
+			\have{3} { P(x_0,y_0)}      \Ae {2}
+			\close
+			\have{4} {\forall v P(x_0,v)}      \Ai {3}
+			\close
+			\have{5} {\forall u \forall v P(u,v)}   \Ai {2-4}
+			
+			
+			
+
+		\end{nd}
+	\]
+\end{answer}
+
+\item {[35 points]} Using only the basic natural deduction rules, find
+  a proof for
+  \begin{displaymath}
+    \exists x (\neg P(x) \lor Q(x)) \turn \exists x \neg (P(x) \land
+    \neg Q(x)).
+\end{displaymath}
+\begin{answer}
+	\[
+		\begin{nd}
+			\hypo{1} {\exists x (\neg P(x) \lor Q(x))} \premise{}
+			\open[x_0]
+				\have{2} {\neg P(x_0) \lor Q(x_0)} \Ee {1}
+				\hypo{3} {P(x_0)\land \neg Q(x_0)} \assumption{}
+				\open
+					\hypo{4} {\neg P(x_0)} \assumption{}
+					\have{5} {P(x_0)} \aeone {3}
+					\have{6} {\bot} \ne {5,4}
+				\close
+				\open
+					\hypo{7} {Q(x_0)} \assumption{}
+					\have{8} {\neg Q(x_0)} \aetwo {3}
+					\have{9} {\bot} \ne {8,7}
+				\close				
+				\have{10} {\neg(P(x_0)\land \neg Q(x_0))} \ni {3, 4-6,7-9}
+			\close
+			\have{11} {\exists x \neg(P(x_0)\land \neg Q(x_0))} \Ei {2-10}
+		\end{nd}
+	\]
+
+\end{answer}
+\item {[35 points]} Using only the basic natural deduction rules, find
+  a proof for
+  \begin{displaymath}
+    \forall x \forall y \forall z [S(x,y) \land S(y,z) \implies
+    S(x,z)],
+    \forall x \neg S(x,x)
+    \turn
+    \forall x \forall y [S(x,y) \implies (\neg S(y,x) \lor S(x,x))]
+\end{displaymath}
+\begin{answer}
+	\[
+		\begin{nd}
+		\hypo{1} {\forall x \forall y \forall z [S(x,y) \land S(y,z) \implies S(x,z)]} \premise{}
+		\hypo{2} {\forall x \neg S(x,x)} \premise{}
+		\open[x_0]
+		\have{3} {\neg S(x_0,x_0)} \Ae {2}
+		\have{4} {\forall y \forall z [S(x_0,y) \land S(y,z) \implies S(x_0,z)]} \Ae {1}
+		\have{5} {\forall y [S(x_0,y) \land S(y,x_0) \implies S(x_0,x_0)]} \Ae {4}
+		\open[y_0]
+		\have{6} {S(x_0,y_0) \land S(y_0,x_0) \implies S(x_0,x_0)} \Ae {5}
+		\open
+		\hypo{7} {S(x_0,y_0)} \assumption{}
+		\open
+		\hypo{8} {S(y_0,x_0)} \assumption{}
+		\have{9} {S(x_0,y_0) \land S(y_0,x_0)} \ai {7,8}
+		\have{10} {S(x_0,x_0)} \ie {6,9}
+		\have{11}  \bot        \ni {3, 10}
+		\close
+		\have{12} {\neg S(y_0,x_0)} \ni {8-11}
+		\have{13} {\neg S(y_0,x_0) \lor S(x_0,x_0)} \oi {12}
+		\close
+		\have{14} {S(x_0,y_0) \implies \neg S(y_0,x_0) \lor S(x_0,x_0)} \ii {7-13}
+		\close
+		\have{15} {\forall y[S(x_0,y) \implies \neg S(y,x_0) \lor S(x_0,x_0)]} \Ai {6-14}
+		\close
+		\have{16} {\forall x \forall y[S(x,y) \implies \neg S(y,x) \lor S(x,x)]} \Ai {3-15}
+		\end{nd}
+	\]
+\end{answer}
+\end{enumerate}
+\end{document}

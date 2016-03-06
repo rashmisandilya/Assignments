@@ -1,0 +1,374 @@
+\documentclass{article}
+\input{503macros.tex}
+\def\unityid{rsandil}
+
+\begin{document}
+\begin{center}
+  {\LARGE CSC 503 Homework Assignment 7}\\[1pc]
+  Out: September 28, 2015 \\
+  Due: October 5, 2015 \\
+  \unityid
+\end{center}
+
+\begin{enumerate}
+
+\item \textbf{[30 points total]} Let $\phi_1$ and $\phi_2$ be the
+  sentences
+  \begin{eqnarray*}
+    \phi_1 
+    & =
+    & \forall x \ \neg P(x,f(x)) \\
+    \phi_2
+    & = 
+    & \forall x \forall y \forall z \ 
+      P(x,y) \land P(y,z) \implies P(f(x),f(z))
+  \end{eqnarray*}
+  where $P$ is a predicate symbol of two arguments and $f$ is a
+  function symbol of one argument.  Assume that $P$ and $f$ are the
+  only nonlogical symbols in the language.
+
+  \begin{itemize}
+
+  \item[(a)] \textbf{[10 points]:} Give a formal interpretation $I$ of
+    the language that makes $\phi_1$ true and $\phi_2$ false.
+    
+\begin{answer}
+       Let the Interpretation $I$ from above such that p(a, b) means $ a \land b$.
+       \begin{eqnarray*}
+    \phi_1 
+    & =
+    & \forall x \ \neg P(x,f(x)) \\
+    \end {eqnarray*}
+       
+     Let f(x) = $\neg x$
+    
+    \textbf{Check for $\phi_1$ :}
+    
+    $\forall x( x \land \neg x)$ is $False$ which means $\forall x P(x,f(x))$ is $False$. Thus $\forall x (\neg P(x,f(x)))$ is $True$
+    
+    Hence $\phi_1$ is \textbf{$True$}
+    
+   \textbf{Check for $\phi_2$ :}
+    
+   Left hand side: $ \forall x \forall y \forall z \ P(x,y) \land P(y,z) $ means $\forall x \forall y \forall z  (x \land y) \land (y \land z)$ 
+    
+    \textbf{If left hand side is True}, we have $(x \land y)$ as $True$ and $(y \land z)$ as $True$ which means x is $True$, y is $True$ and z is $True$
+   
+    
+    \textbf{Right hand side}: P(f(x),f(z)) which means $f(x)\land f(z)$  
+    
+    Now since f(x) = $\neg x$  and f(z) = $\neg z$, $f(x)\land f(z)$ means $\neg x \land \neg z$.
+    
+    if left hand side is $True$, x and z is $True$ which means $\neg x$ and $\neg z$ both are $False$
+    
+    Thus $\neg x \land \neg z$ is $False$
+    
+    If left hand side is true, right hand side is being evaluated as false. Thus $\phi_2$ is \textbf{$False$}
+          
+\end{answer}
+  \item[(b)] \textbf{[5 points]:} Briefly explain why $I$ makes
+    $\phi_1$ true and makes $\phi_2$ false.
+   \begin{answer} 
+    p(x, y) means $x \land y$. Whenever y is a function of x taken in such a way that it is negation of x, p(x, y)
+     will be False. Thus $\neg p(x, y)$ will be True making $\phi_1$ as $True$. In case of  $\phi_2$, left hand side if evaluates to True, we get x, y and z evaluated as $True$. if x and z are $True$, right hand side is evaluated to False, as shown above, Since $T \implies F$ is $F$. Thus $\phi_2$ evaluates to $False$.
+      
+\end{answer}
+  \item[(c)] \textbf{[10 points]:} Give the formal definition of an
+    interpretation $J$ that makes $\phi_1$ false and $\phi_2$ true.
+    
+    \begin{answer}
+       Let the Interpretation $J$ be defined such that p(a, b) means  a \textless b.
+       \begin{eqnarray*}
+    \phi_1 
+    & =
+    & \forall x \ \neg P(x,f(x)) \\
+    \end {eqnarray*}
+    
+    Let f(x) = x+1
+    
+   \textbf{Check for $\phi_1$ :}    
+    
+    $\forall x,(x  \textless  x+1$) is $True$. Thus $\forall x  P(x,f(x))$ is $True$
+    
+    
+    Since $\forall x$ P(x,f(x)) is $True$, thus $\forall x,(\neg  P(x,f(x)))$ is $False $
+    
+    
+    Hence $\phi_1$ is $False$
+    
+   \textbf{Check for $\phi_2$ :}
+    
+   \textbf{If Left hand side is $True$}: $ \forall x \forall y \forall z \ P(x,y) \land P(y,z)$ means $\forall x \forall y \forall z (x \textless y) \land (y \textless z)$ 
+    
+    which means  $x \textless  z $
+    
+   \textbf{ Right hand side}: P(f(x),f(z)) which means f(x)$\textless$ f(z)  
+    
+    Now if f(x) = x + 1  and f(z) = z + 1
+    
+    Thus f(x)$\textless$ f(z) means x + 1 $\textless $ z + 1. Thus  x $\textless $ z  which is $True$
+    
+    Thus if Left hand side is True, Right hand side also evaluates to $True$ . Since $T \implies T$ is $T$. Hence  $\phi_2$ is $True$.
+    
+    
+       
+\end{answer}
+
+  \item[(d)] \textbf{[5 points]:} Briefly explain why $J$ makes
+    $\phi_1$ false and makes $\phi_2$ true.
+    \begin{answer}
+     p(x, y) means x is less than y. Whenever y is a function of x taken in such a way that it is less than x, p(x, y)
+     will be True. Thus $\neg p(x, y)$ will be False making $\phi_1$ $False$ for all x.
+     
+      In case of  $\phi_2$, if left hand side  evaluates to $True$, we get $x \textless z$. If  $x \textless z$, we get right hand side as True, as shown above as $T \implies T$ is $T$. Hence $\phi_2$ will evaluates to True.
+    \end{answer}
+
+  \end{itemize}
+  
+  
+
+\item \textbf{[30 points total]} Apply the unification algorithm to
+  each of the following sets.  For each set, at each step $i$, show
+  (I) the disagreement of $S_i$, (II) the substitution $\sigma_i$ if
+  there is one, or an explanation why there is no unifying
+  substitution, (III) the result $S_{i+1}$ of applying $\sigma_i$ to
+  $S_i$.  If the set unifies, show also (IV) the overall substitution
+  $\sigma_0 \dots \sigma_k$ expressed as a single substitution, not as
+  a composition.
+
+For your reference, the algorithm to calculate the most general
+unifier of a set $S$ of predicate expressions consists of the
+following steps.
+\begin{itemize}
+
+\item Step 0:
+  \begin{itemize}
+  \item Set $S_0 = S$
+  \item Set $\sigma_0 = \epsilon$
+  \end{itemize}
+
+\item Step $k+1$:
+  \begin{itemize}
+  \item If $|S_k| = 1$, return the product substitution $\sigma_0\cdots\sigma_k$
+  \item If the disagreement set $D(S_k)$ contains both a variable
+    $v$ and a term $t$ in which $v$ \emph{does not occur}, then
+    \begin{itemize}
+    \item Choose least such pair
+    \item Set $\sigma_{k+1} = \{ t/v \}$
+    \item Set $S_{k+1} = S_k \sigma_{k+1}$
+    \item Proceed to step $k+2$
+    \end{itemize}
+  \item Otherwise, announce that $S$ has no unifier
+  \end{itemize}
+\end{itemize}
+
+  In the following expressions, assume that $a,b,c$ are constant
+  symbols, $f,g,h$ are function symbols, $P$ is a predicate symbol,
+  and $u,v,w,x,y,z$ are variable symbols.
+
+  \begin{enumerate}
+
+  \item \textbf{[10 points]}
+    $S = \{ P(b,y,f(y)), P(x,x,z) \}$
+    
+        \begin{answer}
+		Initializing $\sigma_0$ to $\{\}$
+		
+		$S_0 = \{P(b, y, f(y)), P(x, x, z)\}$
+		
+		$D(S_0) = \{b, x\}$
+		\bigskip
+		
+		$\sigma_1 = \{b/x\}$
+		
+		$S_1 = \{P(b, y, f(y)), P(b, b, z)\}$
+		
+		$D(S_1) = \{b, y\}$
+		\bigskip
+		
+		$\sigma_2 = \{b/y\}$
+
+		$S_2 = \{P(b, b, f(b)), P(b, b, z)\}$
+
+		$D(S_2) = \{f(b), z\}$	
+		
+		$\sigma_3 = \{f(b)/z\}$
+		
+		$S_3 = \{P(b, b, f(b)), P(b, b, f(b))\}$
+		
+		$|S_3| = 1$	
+	
+		\bigskip
+		
+		$\sigma = \sigma_0 \cdot{} \sigma_1 \cdot{} \sigma_2 \cdot{} \sigma_3$
+		
+		$\sigma = \{\} \cdot{} \{b/x\}  \cdot{} \{b/y\} \cdot{} \{f(b)/z\}$
+		
+		$\sigma = \{b/x\}  \cdot{} \{b/y\} \cdot{} \{f(b)/z\}$
+		
+		$\sigma = \{b/x, b/y\} \cdot{} \{f(b)/z\}$
+		
+		$\sigma = \{b/x, b/y, f(b)/z\}$
+		
+		Unification is feasible for above $\sigma$.
+    \end{answer}
+
+  \item \textbf{[10 points]}
+    $S = \{ P(x,x), P(y,g(h(y))) \}$
+        \begin{answer}
+		Initializing $\sigma_0$ to $\{\}$
+		
+		$S_0 = \{P(x, x), P(y, g(h(y)))\}$
+		
+		$D(S_0) = \{x, y\}$
+		\bigskip
+		
+		$\sigma_1 = \{x/y\}$
+		
+		$S_1 = \{P(x, x), P(x, g(h(x)))\}$
+		
+		$D(S_1) = \{x, g(h(x))\}$
+		
+		Since g(h(x)) contains x,substitution is not possible.
+		
+		Unification is not feasible for above $\sigma$.
+    \end{answer}
+  \item \textbf{[10 points]}
+    $S = \{ P(f(w,a),h(g(v),b)), P(f(w,w),h(x,y)), P(f(v,a),h(g(v),b)) \}$
+      
+      \begin{answer}
+      
+		Initializing $\sigma_0$ to $\{\}$
+		
+		$S_0 = \{P(f(w, a), h(g(v),b)), P(f(w, w), h(x, y)), P(f(v, a), h(g(v), b))\}$
+		
+		$D(S_0) = \{w, v\}$
+		\bigskip
+		
+		$\sigma_1 = \{w/v\}$
+		
+		$S_1 = \{P(f(w, a), h(g(w),b)), P(f(w, w), h(x, y)), P(f(w, a), h(g(w), b))\}$
+		
+		$D(S_1) = \{a, w\}$
+		\bigskip
+		
+		$\sigma_2 = \{a/w\}$
+
+		$S_2 = \{P(f(a, a), h(g(a),b)), P(f(a, a), h(x, y)), P(f(a, a), h(g(a), b))\}$
+
+		$D(S_2) = \{g(a), x\}$	
+		
+		$\sigma_3 = \{g(a)/x\}$
+		
+		$S_3 = \{P(f(a, a), h(g(a),b)), P(f(a, a), h(g(a), y)), P(f(a, a), h(g(a), b))\}$
+		
+		$D(S_3) = \{b, y\}$	
+		
+		$\sigma_4 = \{b/y\}$
+		
+		$S_4 = \{P(f(a, a), h(g(a),b)), P(f(a, a), h(g(a), b)), P(f(a, a), h(g(a), b))\}$
+		
+		$|S_4| = 1$	
+	
+		\bigskip
+		
+		$\sigma = \sigma_0 \cdot{} \sigma_1 \cdot{} \sigma_2 \cdot{} \sigma_3 \cdot{} \sigma_4$
+		
+		$\sigma = \{\} \cdot{} \{w/v\}   \cdot{} \{a/w\}  \cdot{} \{g(a)/x\} \cdot{} \{b/y\}$
+		
+		$\sigma = \{w/v\}   \cdot{} \{a/w\}  \cdot{} \{g(a)/x\} \cdot{} \{b/y\}$
+		
+		$\sigma = \{a/v, a/w\} \cdot{} \{g(a)/x\} \cdot{} \{b/y\}$
+		
+		$\sigma = \{a/v, a/w, g(a)/x\} \cdot{} \{b/y\}$
+		
+		$\sigma = \{a/v, a/w, g(a)/x, b/y\}$
+		
+		Unification is feasible for above $\sigma$.
+    \end{answer}
+  \end{enumerate}
+
+\newpage
+
+\item \textbf{[10 points]} Using the clauses
+  \begin{center}
+    \begin{tabular}{lll}
+      Line & Clause & Justification \\ \hline
+      1. & $\{ \neg P, Q \}$ & Given \\
+      2. & $\{ \neg P, R \}$ & Given \\
+      3. & $\{ \neg S, \neg T, U \}$ & Given \\
+      4. & $\{ \neg U, \neg Q, V \}$ & Given \\
+      5. & $\{ P \}$ & Given \\
+      6. & $\{ S \}$ & Given \\
+      7. & $\{ T \}$ & Given \\ \hline
+    \end{tabular}
+  \end{center}
+  over the propositional symbols $P,Q,R,S,T,U,V$, give a resolution
+  refutation proof of $V$ in either tree or linear form.
+  \begin{answer}
+  From logical point of view, we want to prove: $\{A1, A2, A3, A4, A5, A6, A7\} \turn V$ where
+  
+   A1: $\{ \neg P, Q \}$, A2: $\{ \neg P, R \}$, A3: $\{ \neg S, \neg T, U \}$, A4: $\{ \neg U, \neg Q, V \}$, A5: $\{ P \}$, A6: $\{ S \}$, A7: $\{ T \}$
+   
+  Thus By refutation, we need to check the consistency of:
+  
+  C = $\{A1, A2, A3, A4, A5, A6, A7\} \cup \{\neg V\}$
+  
+		\begin{enumerate}
+		  \item $\{ \neg P, Q \}$
+		  \item $\{ \neg P, R \}$
+		  \item $\{ \neg S, \neg T, U \}$
+		  \item $\{ \neg U, \neg Q, V \}$
+		  \item $\{ P \}$
+		  \item $\{ S \}$ 
+		  \item $\{ T \}$ 
+		  \item $\{\neg V\}$ 
+		  \item $\{Q\}$  From Steps $1 + 5$
+		  \item $\{\neg T, U\}$ From Steps $3 + 6$
+		  \item $\{U\}$ From Steps $7 + 10$
+		  \item $\{\neg Q, V\}$ From Steps $4 + 11$
+		  \item $\{V\}$ From Steps $9 + 12$
+		  \item $\square$ From Steps $8 + 13$
+		  
+		 \end{enumerate}
+		 
+		 Hence C is inconsistent by resolution/refutation so proof of V is established.
+  
+  \end{answer}
+  
+
+\item \textbf{[30 points]} Give a resolution refutation of the
+  following set of clauses.  At each step, indicate the literals being
+  resolved together and the substitutions being made.  You may find it
+  helpful to standardize variables apart in each clause and at each
+  step.
+  \begin{center}
+    \begin{tabular}{llll}
+      Line & Clause & Justification & Substitution \\ \hline
+      1. & $\{ P(a,u,f(h(u))), Q(u,a), R(h(b),b) \}$ & Given & \\
+      2. & $\{ P(a,x,f(y)), P(a,z,f(h(b))), \neg R(y,z) \}$ & Given & \\
+      3. & $\{ \neg P(a,w,f(h(b))), Q(x,a) \}$ & Given & \\
+      4. & $\{ \neg R(h(b),w), Q(w,a) \}$ & Given & \\
+      5. & $\{ \neg Q(v,a) \}$ & Given & \\ \hline
+    \end{tabular}
+  \end{center}
+	\begin{answer}
+		\textbf{Resolution} 
+		
+		\begin{enumerate}
+		  \item $\{P(a, u, f(h(u))), Q(u, a), R(h(b), b)\}$
+		  \item $\{P(a, x, f(y)), P(a, z, f(h(b))), \neg R(y, z)\}$
+		  \item $\{\neg P(a, w, f(h(b))), Q(x, a)\}$
+		  \item $\{\neg R(h(b), w), Q(w, a)\}$
+		  \item $\{\neg Q(v, a)\}$
+		  \item $\{\neg R(h(b), v)\}$ From Steps $4 + 5$. Substituting {v/w}
+		  \item $\{\neg P(a, w, f(h(b)))\}$ From Steps $3 +  5$. Substituting {v/x}
+		  \item $\{ P(a, v, f(h(v))), R(h(b), b)\}$ From Steps $1 + 5$. Substituting {v/u}
+		  \item $\{ P(a, b, f(h(b)))\}$ From Steps $6 + 8$. Substituting {b/v}
+		  \item $\square$ From $7 + 9$. Substituting $\{b/w\}$
+		 \end{enumerate}
+	\end{answer}
+\end{enumerate}
+
+
+\end{document}

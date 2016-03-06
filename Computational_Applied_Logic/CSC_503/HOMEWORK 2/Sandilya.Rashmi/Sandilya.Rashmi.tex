@@ -1,0 +1,137 @@
+\documentclass{article}
+\input{503macros.tex}
+\def\unityid{rsandil}
+
+\begin{document}
+\begin{center}
+  {\LARGE CSC 503 Homework Assignment 2}\\[1pc]
+  Out: August 26, 2015 \\
+  Due: September 2, 2015 \\
+  \unityid
+\end{center}
+
+Prove the validity of the following sequents.  Use only the basic
+rules of natural deduction (no derived rules).
+
+\begin{enumerate}
+
+\item {[10 points]}
+  $p \implies (q \implies r), p \implies q \turn p \implies r$
+  
+  Answer:
+  
+      \begin{answer}
+    	\[
+    		\begin{nd}
+    			\hypo{1} {p \implies (q \implies r)} \premise{}
+    			\hypo{2} {p \implies q } \premise{}
+    			\open 
+    				\hypo{3a} {p} \assumption{}
+    				\have{3b} {q} \ie {2, 3a}
+    				\have{3c} {q \implies r} \ie {1, 3a}
+    				\have{3d} {r} \ie {3b, 3c}
+    			\close
+    			\have{4} {p \implies r}\ii {3a, 3d}
+    			
+    			
+    		\end{nd}
+    	\]
+    \end{answer}
+  
+
+\item {[20 points]} $(p \lor (q \implies p)) \land q \turn p \lor r$
+
+\begin{answer}
+    	\[
+    		\begin{nd}
+    			\hypo{1} {(p \lor (q \implies p)) \land q} \premise{}
+    			
+    			\have{2} {q} \aetwo {1}
+    			\have{3} {(p \lor (q \implies p)) } \aeone {1}
+    			
+    			\open 
+    				\hypo{4} {p} \assumption{}
+    			\close	
+    			\open 
+    				\hypo{5a} {(q \implies p)} \assumption{}
+    				\have{5b} {p} \ie {5a, 2}	
+    			\close
+    			\have{6} {p}\oe {3, 4-4,5a-5b}	
+    			\have{7} {p \lor r}\oi {6}
+    		\end{nd}
+    	\]
+    \end{answer}
+
+\item {[30 points]}
+  $(p \land q) \implies r, r \implies s, q \land \neg s \turn \neg p$
+  
+  \begin{answer}
+    	\[
+    		\begin{nd}
+    			\hypo{1} {(p \land q) \implies r} \premise{}
+    			\hypo{2} {r \implies s} \premise{}
+    			\hypo{3} {q \land \neg s} \premise{}
+    			\have{4} {q} \aeone {3}
+    			\have{5} {\neg s} \aetwo {3}
+    			
+    			\open 
+    				\hypo{6a} {p} \assumption{}
+    				\have{6b} {p \land q} \ai {4, 6a}
+    				\have{6c} {r} \ie {1, 6b}
+    				\have{6d} {s} \ie {2, 6c}
+    				\have{6e} {\bot} \ne {6a-6d}
+    			\close
+    			\have{7} {\neg p}\ni {6a-6e}	
+    		\end{nd}
+    	\]
+    \end{answer}
+
+\item {[40 points]}
+  $(q \land u) \implies t, r \land \neg s, r \land \neg(s \lor q)
+  \implies p \turn (u \land \neg t) \implies p$
+  
+  \begin{answer}
+    	\[
+    		\begin{nd}
+    			\hypo{1} {(q \land u) \implies t} \premise{}
+    			\hypo{2} {r \land \neg s} \premise{}
+    			\hypo{3} {r \land \neg(s \lor q)\implies p} \premise{}
+    			\have{4} {r} \aeone {2}
+    			\have{5} {\neg s} \aetwo {2}
+    			
+    			\open 
+    				\hypo{6a} { u \land \neg t} \assumption{}
+    				\have{6b} {u} \aeone {6a}
+    				\have{6c} {\neg t} \aetwo {6a}
+    			\open
+    			    \hypo{7a} {q} \assumption{}
+    				\have{7b} {q \land u} \oe {7a, 6b}
+    				\have{7c} {t} \ie {1,7b}
+    				\have{7d} {\bot} \ne {6c-7c}
+    			\close
+    			\have{8} {\neg q} \ni {7a-7d}
+    			\open
+    			\hypo{9a} {s \lor q} \assumption{}
+    			\open
+    			\hypo{10a} {s} \assumption{}
+    			\have{10b} {\bot} \ne {5,10a}
+    			\close
+    			\open
+    			\hypo{11a} {q} \assumption{}
+    			\have{11b} {\bot} \ne {8,11a}
+    			\close
+    			\have{12} {\bot} \oe {9a,10a-10b,11a-11b}
+    			\close
+    			\have{13} {\neg (s \lor q)}\ni {9a-12}
+    			\have{14} {r \land (\neg (s \lor q)}\ai {4,13}
+    			\have{15} {p}\ie {14, 3}
+    			\close	
+    			\have{16} {(u \land \neg t) \implies p}\ii {6a, 15}
+    		\end{nd}
+    	\]
+    \end{answer}
+  
+
+\end{enumerate}
+
+\end{document}

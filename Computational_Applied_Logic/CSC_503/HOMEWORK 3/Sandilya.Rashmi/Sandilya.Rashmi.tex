@@ -1,0 +1,213 @@
+\documentclass{article}
+\input{503macros.tex}
+\def\unityid{rsandil}
+
+\begin{document}
+\begin{center}
+  {\LARGE CSC 503 Homework Assignment 3}\\[1pc]
+  Out: September 4, 2015 \\
+  Due: September 11, 2015 \\
+  \unityid
+\end{center}
+
+\begin{enumerate}
+
+\item {[20 points]} Construct a formula $\phi$ in \textbf{DNF} to
+  match the following truth table:
+  \begin{center}
+    \begin{tabular}{cc|c}
+      $p$ & $q$ & $\phi$ \\ \hline
+      T & T & T \\
+      T & F & F \\
+      F & T & T \\
+      F & F & F
+    \end{tabular}
+  \end{center}
+  
+    \begin{answer}
+  	From the above truth tables we can derive the DNF with following steps
+  	\begin{enumerate}
+  	  \item Lines with truth value as '$T$' are $Line1$ and $Line3$.
+  	  \item Thus $\phi$ can be represented in DNF by conjoining two lines  $(Line1 \lor Line3)$. Except for these valuation there are no other valuation for $\phi$ as $T$.
+  	  \item After representing each line in literals, formula becomes $\phi : (p \land q) \lor (\neg p
+  	  \land q)$
+	\end{enumerate}
+	
+	Thus the DNF to match the given truth table is $(p \land q) \lor (\neg p
+  	  \land q)$
+  \end{answer}
+
+\item {[20 points]} Construct a formula $\phi$ in \textbf{CNF} to
+  match the following truth table:
+  \begin{center}
+    \begin{tabular}{ccc|c}
+      $p$ & $q$ & $r$ & $\phi$ \\ \hline
+      T & T & T & T\\
+      T & T & F & F\\
+      T & F & T & F\\
+      T & F & F & F\\
+      F & T & T & F\\
+      F & T & F & T\\
+      F & F & T & T\\
+      F & F & F & T
+    \end{tabular}
+  \end{center}
+  
+    \begin{answer}
+  	\begin{enumerate}
+  		\item Lines with truth value as '$F$' are $Line2$, $Line3$, $Line4$ and $Line5$
+  		\item Thus $\phi$ can be represented in CNF as $(\neg Line2 \land
+  		\neg Line3 \land \neg Line4 \land \neg Line5)$ which means that except for these line values, other values evaluates to $\phi$ as '$T$' 
+  		\item Representing each row by the corresponding values of the
+  		literals, the formula is $\phi : (\neg (p \land q \land \neg r)
+  		\land \neg(p \land \neg q \land r) \land \neg( p \land \neg q \land
+  		\neg r) \land \neg(\neg p \land q \land r))$
+  		\item Using De'Morgans Law, the above formula can be reduced to $\phi: ((\neg
+  		p \lor \neg q \lor r) \land (\neg p \lor q \lor \neg r) \land (\neg p \lor q
+  		\lor r) \land (p \lor \neg q \lor \neg r))$
+  	\end{enumerate}
+  	
+  	Thus the CNF for the given truth table is $((\neg
+  		p \lor \neg q \lor r) \land (\neg p \lor q \lor \neg r) \land (\neg p \lor q
+  		\lor r) \land (p \lor \neg q \lor \neg r))$
+  \end{answer}
+  
+\item {[30 points]} Consider the atomic sentences
+  \begin{center}
+    \begin{tabular}{rcl}
+      $p$ &=& The cow jumped over the moon. \\
+      $q$ &=& The little dog laughed. \\
+      $r$ &=& The dish ran away with the spoon. \\
+    \end{tabular}
+  \end{center}
+  Using these, form the three complex statements
+  \begin{enumerate}
+  \item If the cow jumped over the moon and the little dog laughed,
+    then the dish ran away with the spoon.
+  \item If the little dog laughed, then the cow jumped over the moon.
+  \item If the dish ran away with the spoon, then the little dog
+    laughed.
+  \end{enumerate}
+  Show that these three complex statements are logically independent
+  of each other by providing, for each of these three complex
+  statements, a truth assignment to the atomic sentences that makes
+  the complex statement false and the other complex statements true.
+  
+  \begin{answer}
+  The three complex sentences can be represented as follows:
+  
+  1. $(p \land q) \implies r$
+  
+  2. $q \implies p$
+  
+  3. $ r \implies q$
+  
+ \textbf{Proof for 1st complex sentence}
+  
+  To prove : if  $(p \land q) \implies r$ is false then both $q \implies p$ and $ r \implies q$ are true
+  
+  Let us assume that  $(p \land q) \implies r$ \textbf{is false}
+  
+  This means $(p \land q)$ has to be '$T$'  and $r$ has to be '$F$'  
+  
+  Since $(p \land q)$ is '$T$', it means $p$ has to be '$T$' and $q$ has to be '$T$'
+  
+  Thus $q \implies p$  \textbf{is True}
+  
+  And $ r \implies q$  \textbf{is True}
+  
+   \textbf{Proof for 2nd complex sentence}
+   
+   To prove : if  $q \implies p$  is false then both $(p \land q) \implies r$ and $ r \implies q$ are true
+   
+   Let us assume that $q \implies p$ \textbf{is false}
+   
+   This means  $q$ has to be '$T$'  and $p$ has to be '$F$'  
+   
+   Thus  $(p \land q)$ has to be '$F$'
+   
+   Now Since $(p \land q)$ is '$F$', we can conclude that $(p \land q) \implies r$ \textbf{is True}
+   
+ Also since $q$ is '$T$', we can say that $ r \implies q$  \textbf{is True}
+ 
+  \textbf{Proof for 3rd complex sentence}
+  
+   To prove : if  $ r \implies q$  is false then both $(p \land q) \implies r$ and $q \implies p$ are true
+  
+   Let us assume that $ r \implies q$ \textbf{is false}
+   
+   This means that $r$ has to be '$T$' and $q$ has to be '$F$'
+   
+   Now since $r$ is '$T$', we can say that  $(p \land q) \implies r$ \textbf{is True}
+   
+   Also since $q$ is '$F$', we can say that $q \implies p$  \textbf{is True}
+  
+  Thus we can say that the three complex sentences are logically independent of each other.
+  
+  
+  
+  \end{answer}
+  
+
+\item {[30 points]} Apply algorithm HORN from page 66 of the textbook
+  to the following Horn formula.
+  \begin{displaymath}
+    \begin{array}{ll}
+      (\top \implies q) &\land \\
+      (\top \implies s) &\land \\
+      (w \implies \bot) &\land \\
+      (p \land q \land s \implies \bot) &\land \\
+      (v \implies s) &\land \\
+      (\top \implies r) &\land \\
+      (r \implies p) &\land \\
+      (p \land s \implies s)
+    \end{array}
+  \end{displaymath}
+  Your answer should list propositional letters in the order in which
+  they are marked as well as giving the overall answer.
+  
+  \begin{answer}
+	\begin{enumerate}
+	  \item Mark all occurances of $\top$.
+	  	
+	  \item Mark $q, s, r$ from $(\top \implies q), (\top \implies s),
+	  (\top \implies r)$
+	  
+		\begin{displaymath}
+    		\begin{array}{ll}
+   				      (\top \implies \textbf{q}) &\land \\
+                      (\top \implies \textbf{s}) &\land \\
+                      (w \implies \bot) &\land \\
+                      (p \land \textbf{q} \land \textbf{s} \implies \bot) &\land \\
+                      (v \implies \textbf{s}) &\land \\
+                      (\top \implies \textbf{r}) &\land \\
+                      (\textbf{r} \implies p) &\land \\
+                      (p \land \textbf{s} \implies \textbf{s})
+    		\end{array}
+  		\end{displaymath}
+  		\item Mark $p$ from $(r \implies p)$
+  		
+		\begin{displaymath}
+    		\begin{array}{ll}
+   				      (\top \implies \textbf{q}) &\land \\
+                      (\top \implies \textbf{s}) &\land \\
+                      (w \implies \bot) &\land \\
+                      (\textbf{p} \land \textbf{q} \land \textbf{s} \implies \bot) &\land \\
+                      (v \implies \textbf{s}) &\land \\
+                      (\top \implies \textbf{r}) &\land \\
+                      (\textbf{r} \implies \textbf{p}) &\land \\
+                      (\textbf{p} \land \textbf{s} \implies \textbf{s})
+    		\end{array}
+  		\end{displaymath}
+  		
+  		\item Mark $\bot$ from $(\textbf{p} \land \textbf{q} \land \textbf{s}
+  		\implies \bot)$
+  		
+	\end{enumerate}
+	
+	The order of propositional letters is $q, s, r, p,\bot$. 
+	Since we have marked $\bot$, the horn formula is \textbf{'Unsatisfiable'}.
+\end{answer}
+
+\end{enumerate}
+\end{document}

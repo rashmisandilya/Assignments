@@ -1,0 +1,205 @@
+\documentclass{article}
+\input{503macros.tex}
+\def\unityid{rsandil}
+
+\usepackage{amsfonts, amsmath, amsthm}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+\usepackage{stmaryrd}
+
+\def\Sometime{\mathord{\mathsf{F}}}
+\def\Forever{\mathord{\mathsf{G}}}
+\def\Next{\mathord{\mathsf{O}}}
+\def\NextX{\mathord{\mathsf{X}}}
+\def\Until{\mathrel{\mathsf{U}}}
+\def\Release{\mathrel{\mathsf{R}}}
+\def\WeakUntil{\mathrel{\mathsf{W}}}
+\def\Before{\mathrel{\mathsf{B}}}
+\def\True{\mathord{\mathsf{true}}}
+\def\All{\mathord{\mathsf{A}}}
+\def\Exists{\mathord{\mathsf{E}}}
+\def\Every{\mathord{\mathsf{E}}}
+
+\def\True{\mathord{\mathtt{true}}}
+\def\False{\mathord{\mathtt{false}}}
+\def\If{\mathrel{\mathtt{if}}}
+\def\Else{\mathrel{\mathtt{else}}}
+\def\While{\mathrel{\mathtt{while}}}
+\def\IfElse#1#2#3{\If #1 \ \{ #2 \} \Else \{ #3 \}}
+\def\Whiledo#1#2{\While #1\ \{ #2 \}}
+\def\Hcond#1{\llparenthesis #1 \rrparenthesis}
+\def\Hoare#1#2#3{\Hcond{#1} \mathrel{#2} \Hcond{#3}}
+
+\def\parmodels{\mathrel{\models_{\textup{par}}}}
+\def\totmodels{\mathrel{\models_{\textup{tot}}}}
+\def\parturn{\mathrel{\turn_{\textup{par}}}}
+\def\totturn{\mathrel{\turn_{\textup{tot}}}}
+
+
+
+\begin{document}
+\begin{center}
+  {\LARGE CSC 503 Homework Assignment 11}\\[1pc]
+  Out: October 23, 2015 \\
+  Due: October 30, 2015 \\
+  \unityid
+\end{center}
+
+
+In the following proofs about programs, use the natural deduction
+proof environment, the \verb+\Hcond+ macro, and the Hoare-logic
+justifications \verb+\Implied{}+, \verb+\Assignment{}+,
+\verb+\IfStatement{}+, \verb+\PartialWhile{}+, \\
+\verb+\InvariantGuard{}+, and \verb+\TotalWhile{}+ to present proofs
+of partial or total correctness.  If you are not using LaTeX, you can
+substitute double parentheses for the Hoare condition delimiters
+$\Hcond{~}$.  For example, we can rewrite the proof in Example 4.13.1
+on page 277 of the textbook as
+  \begin{displaymath}
+    \begin{nd}
+      \have{} {\Hcond{y = 5}}
+      \have{} {\Hcond{y + 1 = 6}}         \Implied{}
+      \have{} {\texttt{\textbf{x = y + 1;}}}   
+      \have{} {\Hcond{x = 6}}          \Assignment{}
+    \end{nd}
+  \end{displaymath}
+  The standard stmaryrd package is also used in these macros.
+
+\begin{enumerate}
+
+\item \textbf{[20 points]} Recall that the arithmetic expressions in
+  the simple textbook programming language only refer to integers.
+  Use the proof rule for assignment and integer arithmetic entailment
+  as appropriate to show the validity of
+  \begin{displaymath}
+    \parturn \Hoare{x > 1 \land y > 0}{P}{x > 1 \land y \ge 2}.
+  \end{displaymath}
+where $P$ is the program 
+  \begin{displaymath}
+    \begin{nd}
+      \have{} {\texttt{\textbf{a = 2 * x;}}}   
+      \have{} {\texttt{\textbf{y = x + a;}}}          
+      \have{} {\texttt{\textbf{y = y - x;}}}          
+    \end{nd}
+  \end{displaymath}
+  
+\begin{answer}
+  	\begin{displaymath}
+    \begin{nd}
+      \have{} {\Hcond{x > 1 \land y > 0}} 
+      \have{} {\Hcond{x > 1 \land 2x \ge 2}} \Implied{} 
+      \have{} {\texttt{\textbf{a = 2 * x}}} 
+      \have{} {\Hcond{x > 1 \land a \ge 2}} \Assignment{} 
+      \have{} {\texttt{\textbf{y = x + a;}}}   
+      \have{} {\Hcond{x > 1 \land y - x \ge 2}} \Assignment{} 
+      \have{} {\texttt{\textbf{y = y - x;}}}
+      \have{} {\Hcond{x > 1 \land y \ge 2}} \Assignment{}          
+    \end{nd}
+  \end{displaymath}
+  \end{answer}
+  
+\item \textbf{[40 points]} Prove the validity of the sequent
+  $\parturn \Hoare{y > 0}{Q}{w = \max(y,z)}$ where $\max(y,z)$ is the
+  largest number of $y$ and $z$, and where the code of $Q$ is given by
+  \begin{displaymath}
+    \begin{nd}
+      \have{} {\texttt{\textbf{x = 0;}}}   
+      \have{} {\texttt{\textbf{if (x < y) \{}}}   
+      \open
+      \have{} {\texttt{\textbf{if (y < z) \{}}}   
+      \open
+      \have{} {\texttt{\textbf{w = z;}}}          
+      \close
+      \have{} {\texttt{\textbf{\} else \{}}}                   
+      \open
+      \have{} {\texttt{\textbf{w = y;}}}   
+      \close
+      \have{} {\texttt{\textbf{\};}}}                  
+      \close
+      \have{} {\texttt{\textbf{\} else \{}}}                   
+      \open
+      \have{} {\texttt{\textbf{w = x;}}}   
+      \close
+      \have{} {\texttt{\textbf{\}}}}                  
+    \end{nd}
+  \end{displaymath}  
+  \begin{answer}
+  \begin{displaymath}
+    \begin{nd}
+      \have{} {\Hcond{ y > 0}}
+      \have{} {\Hcond{(0 < y \implies ((y < z) \implies z = max(y,z))\land(\neg(y < z) \implies y = max(y,z)))}  \\ 
+      {\land(\neg(0 < y) \implies 0 = max(y,z))}}\Implied{}
+      \have{} {\texttt{\textbf{x = 0;}}}
+      \have{} {\Hcond{(x < y \implies ((y < z) \implies z = max(y,z))\land(\neg(y < z) \implies y = max(y,z)))}  \\ 
+      {\land(\neg(x < y) \implies x = max(y,z))}}\Assignment{}
+      \have{} {\texttt{\textbf{if (x < y) \{}}}
+      \have{} {\Hcond{(y < z \implies z = max(y,z) \land \neg(y < z) \implies y =
+      max(y,z)}} \IfStatement{}   
+      \open
+      \have{} {\texttt{\textbf{if (y < z) \{}}}   
+      \open
+      \have{} {\Hcond{z = \max(y,z)}} \IfStatement{}  
+      \have{} {\texttt{\textbf{w = z;}}}
+      \have{} {\Hcond{w = \max(y,z)}} \Assignment{}            
+      \close
+      \have{} {\texttt{\textbf{\} else \{}}}                   
+      \open
+      \have{} {\Hcond{y = \max(y,z)}} \IfStatement{}  
+      \have{} {\texttt{\textbf{w = y;}}} 
+      \have{} {\Hcond{w = \max(y,z)}} \Assignment{}    
+      \close
+      \have{} {\texttt{\textbf{\};}}}                  
+      \close
+      \have{} {\Hcond{w = \max(y,z)}} \IfStatement{} 
+      \have{} {\texttt{\textbf{\} else \{}}}                   
+      \open
+      \have{} {\Hcond{x = \max(y,z)}} \IfStatement{}  
+      \have{} {\texttt{\textbf{w = x;}}}   
+      \have{} {\Hcond{w = \max(y,z)}} \Assignment{}  
+      \close
+      \have{} {\texttt{\textbf{\}}}}    
+      \have{} {\Hcond{w = \max(y,z)}} \IfStatement{}               
+    \end{nd}
+  \end{displaymath}
+  \end{answer}
+NOTE: In line number 2 and 4 vertical line paranthesis is meant to enclose the complete statement split in multiline(2). Formatting in latex caused the problem.
+\item \textbf{[40 points]} Prove the validity of the sequent
+  $\parturn \Hoare{w = x \land x \ge 0}{R}{z = x \cdot y}$ where the
+  code of $R$ is given by
+  \begin{displaymath}
+    \begin{nd}
+      \have{} {\texttt{\textbf{z = 0;}}}   
+      \have{} {\texttt{\textbf{while (w != 0) \{}}}   
+      \open
+      \have{} {\texttt{\textbf{z = z + y};}}   
+      \have{} {\texttt{\textbf{w = w - 1};}}   
+      \close
+      \have{} {\texttt{\textbf{\}}}}                  
+    \end{nd}
+  \end{displaymath}
+\end{enumerate}
+\begin{answer}
+	\begin{displaymath}
+    \begin{nd}
+      \have{} {\Hcond{w = x \land x \ge 0}} 
+      \have{} {\Hcond{x = w}} \Implied{}
+      \have{} {\Hcond{0 = (x - w)y}}\Implied{}
+      \have{} {\texttt{\textbf{z = 0;}}}   
+      \have{} {\Hcond{z = (x - w)y}}\Assignment{}
+      \have{} {\texttt{\textbf{while (w != 0) \{}}}   
+      \open
+      \have{} {\Hcond{z = (x - w)y \land \neg (w != 0)}} \InvariantGuard{}
+      \have{} {\Hcond{z + y = (x - (w - 1)) y}} \Implied{}
+      \have{} {\texttt{\textbf{z = z + y};}} 
+      \have{} {\Hcond{z = (x - (w - 1)) y}} \Assignment{} 
+      \have{} {\texttt{\textbf{w = w - 1};}}  
+      \have{} {\Hcond{z = (x - w) y}} \Assignment{}
+      \close
+      \have{} {\texttt{\textbf{\}}}} 
+      \have{} {\Hcond{z = (x - w)\cdot y \land \neg (w != 0)}} \PartialWhile{}
+      \have{} {\Hcond{z = x \cdot y}} \Implied{}
+    \end{nd}
+  \end{displaymath}
+\end{answer}
+\end{document}

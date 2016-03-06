@@ -1,0 +1,177 @@
+\documentclass{article}
+\input{503macros.tex}
+\def\unityid{rsandil}
+
+\begin{document}
+\begin{center}
+  {\LARGE CSC 503 Homework Assignment 4}\\[1pc]
+  Out: September 9, 2015 \\
+  Due: September 16, 2015 \\
+  \unityid
+\end{center}
+
+Unless directed otherwise, follow the convention of the text and
+assume that $a,b,c,d,e$ are constant symbols, $f,g,h$ are function
+symbols, and $w,u,v,x,y,z$ are variable symbols.
+
+\begin{enumerate}
+
+\item Use the predicates
+  \begin{center}
+    \begin{tabular}{rl}
+      $C(x,y)$ : & $x$ is a champion of $y$ \\
+      $F(x,y)$ : & $x$ is a fan of $y$ \\
+      $Q(x,y)$ : & $x$ is the quarterback of $y$ \\
+      $R(x,y)$ : & $x$ is a rival of $y$ \\
+      $S(x,y)$ : & $x$ is the sister of $y$ \\
+      $T(x)$   : & $x$ is a team \\
+    \end{tabular}
+  \end{center}
+and the constant (nullary function) symbols
+  \begin{center}
+    \begin{tabular}{rl}
+      $s$ : & Serena \\
+      $t$ : & Tom \\
+    \end{tabular}
+  \end{center}
+to translate the following English sentences into predicate logic.
+You are not allowed to use any predicate, function, or constant
+symbols other than the above.
+\begin{enumerate}
+\item {[5 points]} Serena is a champion.
+\begin{answer}
+     \begin{displaymath}
+           \exists x(C(s, x))
+       \end{displaymath}
+\end{answer}
+\item {[5 points]} Any team that has Serena for a quarterback has Tom
+  for a fan.
+  \begin{answer}
+     \begin{displaymath}
+           \forall x ((T(x)\land Q(s,x)) \implies F(t,x))
+       \end{displaymath}
+\end{answer}
+\item {[5 points]} Tom is a fan of every champion.
+  \begin{answer}
+     \begin{displaymath}
+           \forall x \exists y(C(x,y)\implies F(t,x))
+       \end{displaymath}
+\end{answer}
+\item {[5 points]} Tom is a fan of Tom.
+  \begin{answer}
+     \begin{displaymath}
+       F(t,t)
+       \end{displaymath}
+\end{answer}
+\item {[5 points]} Every team has a fan.
+  \begin{answer}
+     \begin{displaymath}
+       \forall x(T(x) \implies \exists y(F(y,x)))
+       \end{displaymath}
+\end{answer}
+\item {[5 points]} All champions are rivals.
+  \begin{answer}
+     \begin{displaymath}
+       \forall x \forall y (C(x,y) \implies \exists w (R(x,w)))
+       \end{displaymath}
+\end{answer}
+\item {[5 points]} Only teams have rivals.
+  \begin{answer}
+     \begin{displaymath}
+   \forall x \forall y(R(x,y)\implies(T(y))
+        \end{displaymath}
+\end{answer}  
+\item {[5 points]} All rivals are teams that have Tom for a quarterback.
+  \begin{answer}
+     \begin{displaymath}
+   \forall x \forall y((R(x,y)\implies(T(x)\land Q(t,x)))
+        \end{displaymath}
+\end{answer} 
+\item {[5 points]} Some sister of some champion is a champion.
+  \begin{answer}
+     \begin{displaymath}
+   \exists x \exists y((S(x,y)\land \exists z(C(y,z)) \land \exists w(C(x,w)))
+        \end{displaymath}
+\end{answer} 
+\item {[5 points]} Every sister of every champion is a champion.
+\begin{answer}
+ \begin{displaymath}
+ \forall x \forall y((S(x,y)\land \exists z(C(y,z)) \land \exists w(C(x,w)))
+         \end{displaymath}
+\end{answer}
+\end{enumerate}
+
+\item Let $c$ and $d$ be constants, $f$ a function symbol with two
+  arguments, $g$ a function symbol with three arguments, $h$ a
+  function symbol with one argument, $P$ a predicate symbol with two
+  arguments, and $Q$ a predicate symbol with three arguments.
+  Indicate, for each of the following strings, which strings are
+  formulas in predicate logic, and specify a reason for failure for
+  strings which are not.
+  \begin{enumerate}
+  \item {[5 points]} $\forall x\ Q(f(d,y),g(h(c,x),d,y),x)$
+  \begin{answer}
+  This formula is \textbf{invalid} as function $h$ has arity of one but here it has been incorrectly used to accept two arguments.
+  \end{answer}
+  \item {[5 points]} $\forall x\ P(x,c) \lor g(f(d,x),h(y),y)$
+   \begin{answer}
+  This formula is a \textbf{invalid} since left hand side of logical connective $\lor$ is a formula whereas right hand side is a term.
+    \end{answer}
+  \item {[5 points]} $\forall x (Q(z,z,z) \implies P(h(P(z,z)),z))$
+  \begin{answer}
+  This formula is \textbf{invalid} as $P(z,z)$ is not a term and so all the parameters to the function $h$ are not terms.
+  \end{answer}
+  \item {[5 points]} $Q(h(h(h(c))),d,\neg f(d,d)) \implies P(c,c)$
+    \begin{answer}
+  This formula is a \textbf{invalid} formula in predicate logic as negation of $f(d,d)$ is not a term
+   \end{answer}
+  \item {[5 points]} $\forall x \forall y \exists z\ P(c,d,c)$
+      \begin{answer}
+  This formula is \textbf{invalid} formula in predicate logic since the
+  	predicate $P$ is incorrectly used to accept three arguments. Predicate $P$ accepts only two arguments.
+   \end{answer}
+  \end{enumerate}
+
+\item Let $P$ be a predicate symbol with arity 2, and let $\phi$ be
+  the formula
+  \begin{displaymath}
+    \forall y\ [(\neg P(y,x) \lor P(y,z)) \land \exists y \forall z\ P(y,z)]
+  \end{displaymath}
+  \begin{enumerate}
+  \item {[5 points]} Indicate, for each occurrence of each variable in
+    $\phi$, whether that occurrence is free or bound.
+        \begin{answer}
+    	The variables in $\phi$ include $x, y$ and $z$.
+    	The highlighted variables in $\phi$ are free.
+    	
+    	\begin{displaymath}
+    		\forall y\ [(\neg P(y,\textbf{x}) \lor P(y,\textbf{z})) \land \exists y \forall z\ P(y,z)]
+  		\end{displaymath}
+  		 The rest of the variables are bounded.
+    \end{answer}
+  \item {[5 points]} List all variables which occur both free and
+    bound in $\phi$.
+    \begin{answer}
+    	The variable $z$ in $\phi$ are both free and bound. $z$ is bounded by $\exists y \forall z\ P(y,z)$ on right hand side.
+    	$z$ is free left hand side.
+    \end {answer}
+  \item {[5 points]} Compute $\phi[t/x]$ for $t = g(f(g(y,y)),z)$.  Is
+    $t$ free for $x$ in $\phi$?
+    \begin{answer}
+    	$t$ is not free for $x$ in $\phi$ as the free instance of $x$ on replacement with $t$ will be become bounded as $t$ is function of $y$.Thus $\phi[t/x]$ will remain $\phi$. 
+    \end{answer}
+  \item {[5 points]} Compute $\phi[t/y]$ for $t = g(f(g(y,y)),z)$ Is
+    $t$ free for $y$ in $\phi$?
+    \begin{answer}
+     $t$ is not free for $y$ in $\phi$ as there is no free occurrence of $y$ in $\phi$ to be
+    	replaced by $t$. Thus $\phi[t/x]$ will remain $\phi$.
+    \end{answer}
+  \item {[5 points]} Compute $\phi[t/z]$ for $t = g(f(g(y,y)),z)$ Is
+    $t$ free for $z$ in $\phi$?
+   \begin{answer}
+    	$t$ is not free for $z$ in $\phi$ as the free instance of $z$ on replacement with $t$ will become bounded since $t$ is a function of $y$ .Thus $\phi[t/z]$ will remain $\phi$. 
+    \end{answer}
+  \end{enumerate}
+
+\end{enumerate}
+\end{document}

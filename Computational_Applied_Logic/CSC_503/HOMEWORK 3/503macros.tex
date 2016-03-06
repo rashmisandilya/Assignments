@@ -1,0 +1,78 @@
+% Package and macro definitions for CSC 503
+% Originally prepared August 23, 2012 by Jon Doyle
+
+%%% Page dimensions
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\footskip}{0.5in}
+
+%%% Font and symbol definition packages
+\usepackage{times} 
+\usepackage{helvet} 
+\usepackage{alltt}
+\usepackage{amsfonts, amsmath, amsthm}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+
+%%% TikZ diagramming package
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+%%% The modified Sellinger fitch.sty file
+\input{fitchhr.sty}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\def\land{\wedge}
+\def\lor{\vee}
+\def\implies{\rightarrow}
+\def\iff{\leftrightarrow}
+\def\turn{\vdash}
+\def\lrturn{\dashv\vdash}
+\def\Cn{\text{Cn}}
+\def\Th{\text{Th}}
+\def\defeq{\stackrel{\rm def}{=}}
+
+%%% The environment for providing answers to problems
+\newenvironment{answer}%
+{\par\noindent\textbf{Answer}\par\noindent}%
+{}
+
+\def\Sometime{\mathord{\mathsf{F}}}
+\def\Forever{\mathord{\mathsf{G}}}
+\def\Next{\mathord{\mathsf{O}}}
+\def\NextX{\mathord{\mathsf{X}}}
+\def\Until{\mathrel{\mathsf{U}}}
+\def\Release{\mathrel{\mathsf{R}}}
+\def\WeakUntil{\mathrel{\mathsf{W}}}
+\def\Before{\mathrel{\mathsf{B}}}
+
+\def\True{\mathord{\mathsf{true}}}
+
+\def\All{\mathord{\mathsf{A}}}
+\def\Exists{\mathord{\mathsf{E}}}
+\def\Every{\mathord{\mathsf{E}}}
+
+\def\True{\mathord{\mathtt{true}}}
+\def\False{\mathord{\mathtt{false}}}
+
+\def\If{\mathrel{\mathtt{if}}}
+\def\Else{\mathrel{\mathtt{else}}}
+\def\While{\mathrel{\mathtt{while}}}
+\def\IfElse#1#2#3{\If #1 \ \{ #2 \} \Else \{ #3 \}}
+\def\Whiledo#1#2{\While #1\ \{ #2 \}}
+\def\Hcond#1{\llparenthesis #1 \rrparenthesis}
+\def\Hoare#1#2#3{\Hcond{#1} \mathrel{#2} \Hcond{#3}}
+
+\def\parmodels{\mathrel{\models_{\textup{par}}}}
+\def\totmodels{\mathrel{\models_{\textup{tot}}}}
+\def\parturn{\mathrel{\turn_{\textup{par}}}}
+\def\totturn{\mathrel{\turn_{\textup{tot}}}}
+
